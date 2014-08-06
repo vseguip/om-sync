@@ -127,4 +127,4 @@
             (async/unsub (om/get-shared owner :tx-chan) :txs txs))))
       om/IRender
       (render [_]
-        (om/build (:view opts) coll)))))
+        (om/build (:view opts) coll (:view-options opts))))))
