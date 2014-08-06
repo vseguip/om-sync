@@ -56,7 +56,9 @@
   om.core/build:
 
   :view - a required Om component function to render the collection.
-
+  
+  :view-options a map that will be passed to the view when building.
+  
   :id-key - which property represents the server id for a item in the
     collection.
 
