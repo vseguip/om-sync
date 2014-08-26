@@ -16,8 +16,13 @@
       {:method (type->method tag)
        :url url
        :data edn
-       :on-error (fn [err] (put! res-chan err))
-       :on-complete (fn [res] (put! res-chan res))})
+       :on-error (fn [err] 
+                   (put! res-chan err))
+       :on-complete (fn [res]
+                      (try
+                        (put! res-chan res)
+                        (catch :default e
+                           (put! res-chan {:error e}))))})
     res-chan))
 
 (defn ^:private tag-and-edn [coll-path path tag-fn id-key tx-data]
