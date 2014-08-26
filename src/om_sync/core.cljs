@@ -16,11 +16,10 @@
       {:method (type->method tag)
        :url url
        :data edn
-       :on-error (fn [err] 
-                   (put! res-chan err))
+       :on-error (fn [err] (put! res-chan err))
        :on-complete (fn [res]
                       (try
-                        (put! res-chan res)
+                        (put! res-chan (or res {:error "Empty response"}))
                         (catch :default e
                            (put! res-chan {:error e}))))})
     res-chan))
